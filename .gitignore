@@ -1,0 +1,7 @@
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+__pycache__/
+*.blend1

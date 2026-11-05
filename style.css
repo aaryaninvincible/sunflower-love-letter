@@ -1,0 +1,766 @@
+/* ==========================================================================
+   SUNFLOWER LOVE LETTER - LUXURY ROMANTIC STYLING
+   ========================================================================== */
+
+:root {
+  --bg-gradient: radial-gradient(circle at 50% 20%, #1c1510 0%, #0d0a08 60%, #050403 100%);
+  --gold-primary: #f5b025;
+  --gold-glow: #ffc84b;
+  --gold-accent: #e59819;
+  --amber-soft: rgba(245, 176, 37, 0.15);
+  
+  --parchment-bg: #fcf9f0;
+  --parchment-border: #e8ddc7;
+  --parchment-text: #2c251f;
+  --ink-secondary: #574b41;
+  --wax-red: #9e1b24;
+  --wax-glow: #db2b37;
+  --wax-shadow: rgba(85, 10, 16, 0.6);
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --transition-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: #fff;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Floating Petal Container */
+#petal-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+/* Falling Canvas 2D Petal Element */
+.falling-petal {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, #ffd043, #e89512 70%);
+  border-radius: 60% 0 60% 0;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 5px rgba(232, 149, 18, 0.3));
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-5vh) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(105vh) rotate(540deg) scale(1);
+    opacity: 0.1;
+  }
+}
+
+/* ==========================================================================
+   HEADER NAVIGATION
+   ========================================================================== */
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem;
+  z-index: 20;
+  background: rgba(13, 10, 8, 0.4);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(245, 176, 37, 0.12);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sunflower-icon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 10px rgba(245, 176, 37, 0.5));
+  animation: gentle-spin 20s linear infinite;
+}
+
+@keyframes gentle-spin {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #fff 40%, var(--gold-glow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(245, 176, 37, 0.25);
+  color: #fff;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.glass-btn i {
+  color: var(--gold-primary);
+}
+
+.glass-btn:hover {
+  background: rgba(245, 176, 37, 0.15);
+  border-color: var(--gold-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(245, 176, 37, 0.25);
+}
+
+/* ==========================================================================
+   MAIN EXPERIENCE SPLIT
+   ========================================================================== */
+
+.main-experience {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  height: calc(100vh - 78px);
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 968px) {
+  .main-experience {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+/* Left Section: 3D Sunflower Canvas */
+.sunflower-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#canvas-3d-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#sunflower-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas-hint {
+  position: absolute;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hint-pill {
+  background: rgba(13, 10, 8, 0.7);
+  border: 1px solid rgba(245, 176, 37, 0.3);
+  color: #e5ded5;
+  font-size: 0.78rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hint-pill i {
+  color: var(--gold-glow);
+}
+
+.sunflower-status-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(13, 10, 8, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  color: #c9bfb5;
+  backdrop-filter: blur(6px);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold-primary);
+  box-shadow: 0 0 8px var(--gold-primary);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+/* Petal Oracle Box */
+.oracle-container {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.oracle-box {
+  background: rgba(22, 17, 13, 0.75);
+  border: 1px solid rgba(245, 176, 37, 0.25);
+  backdrop-filter: blur(14px);
+  padding: 0.85rem 1.5rem;
+  border-radius: 1rem;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.oracle-label {
+  font-size: 0.8rem;
+  color: #a39589;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.oracle-number {
+  font-weight: 700;
+  color: var(--gold-glow);
+  margin-left: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.oracle-quote {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #fff2db;
+  margin-top: 0.25rem;
+  transition: opacity 0.4s ease;
+}
+
+/* ==========================================================================
+   RIGHT SECTION: ROMANTIC LOVE LETTER & 3D ENVELOPE
+   ========================================================================== */
+
+.letter-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  perspective: 1200px;
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The Envelope Container */
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background: #3a2e26;
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 35px rgba(245, 176, 37, 0.15);
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.6s var(--transition-smooth);
+}
+
+.envelope:hover {
+  transform: translateY(-4px);
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #42352c, #31261f);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(245, 176, 37, 0.2);
+}
+
+/* Envelope Flap (Top Triangular 3D fold) */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: top;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s;
+  z-index: 4;
+}
+
+.envelope-flap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 230px solid transparent;
+  border-right: 230px solid transparent;
+  border-top: 170px solid #4a3c32;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+@media (max-width: 500px) {
+  .envelope-flap::before {
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
+    border-top: 130px solid #4a3c32;
+  }
+}
+
+/* Envelope Front Pockets (Left, Right, Bottom Triangles) */
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.envelope-front::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 230px solid #382c23;
+  border-right: 230px solid #382c23;
+  border-top: 150px solid transparent;
+}
+
+.envelope-front::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 230px solid transparent;
+  border-right: 230px solid transparent;
+  border-bottom: 160px solid #3e3127;
+  filter: drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.25));
+}
+
+@media (max-width: 500px) {
+  .envelope-front::before {
+    border-left: 170px solid #382c23;
+    border-right: 170px solid #382c23;
+    border-top: 110px solid transparent;
+  }
+  .envelope-front::after {
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
+    border-bottom: 120px solid #3e3127;
+  }
+}
+
+/* Wax Seal Button */
+.wax-seal {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  background: radial-gradient(circle at 35% 35%, var(--wax-glow), var(--wax-red));
+  border-radius: 50%;
+  box-shadow: 0 4px 15px var(--wax-shadow), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 500px) {
+  .wax-seal {
+    top: 105px;
+    width: 46px;
+    height: 46px;
+  }
+}
+
+.wax-seal:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(219, 43, 55, 0.7);
+}
+
+.seal-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.seal-ring {
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* The Romantic Letter Card */
+.letter-card {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  min-height: 290px;
+  background: var(--parchment-bg);
+  color: var(--parchment-text);
+  border-radius: 0.5rem;
+  padding: 2rem 2.25rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--parchment-border);
+  z-index: 2;
+  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s ease;
+  overflow: hidden;
+}
+
+.letter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(87, 75, 65, 0.15);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.date-stamp {
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.wax-seal-mini {
+  color: var(--wax-red);
+  font-size: 1.1rem;
+}
+
+.salutation {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #1a1512;
+  margin-bottom: 1rem;
+}
+
+.letter-body {
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: #3b3129;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.poetic-verse {
+  font-style: italic;
+  color: #7a3a0e;
+  border-left: 2px solid var(--gold-primary);
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+  transition: all 0.4s ease;
+}
+
+.letter-closing {
+  margin-top: 1.5rem;
+}
+
+.closing-label {
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+  font-style: italic;
+}
+
+.signature-script {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: #1a1512;
+  margin-top: -0.2rem;
+}
+
+.letter-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(87, 75, 65, 0.2);
+}
+
+.card-btn {
+  background: rgba(87, 75, 65, 0.08);
+  border: 1px solid rgba(87, 75, 65, 0.2);
+  color: #2c251f;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.card-btn.primary {
+  background: var(--wax-red);
+  color: #fff;
+  border-color: var(--wax-red);
+}
+
+.card-btn.primary:hover {
+  background: var(--wax-glow);
+  box-shadow: 0 4px 12px rgba(219, 43, 55, 0.35);
+}
+
+.card-btn:hover {
+  background: rgba(87, 75, 65, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Open Envelope Animation State */
+.envelope.is-open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.is-open .wax-seal {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.envelope.is-open .letter-card {
+  transform: translateX(-50%) translateY(-190px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55), 0 0 30px rgba(245, 176, 37, 0.2);
+  z-index: 10;
+}
+
+.open-instruction {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: #a39589;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bounce-subtle 2s infinite;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ==========================================================================
+   CUSTOMIZER MODAL DRAWER
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.customizer-modal {
+  background: #1e1713;
+  border: 1px solid rgba(245, 176, 37, 0.3);
+  border-radius: 1.25rem;
+  width: 100%;
+  max-width: 520px;
+  padding: 1.75rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 176, 37, 0.15);
+  transform: scale(0.95);
+  transition: transform 0.3s var(--transition-smooth);
+}
+
+.modal-backdrop.is-active .customizer-modal {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.75rem;
+}
+
+.modal-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--gold-glow);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.close-icon {
+  background: none;
+  border: none;
+  color: #a39589;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-icon:hover {
+  color: #fff;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.modal-body label {
+  font-size: 0.8rem;
+  color: #d1c5ba;
+  font-weight: 500;
+  margin-top: 0.4rem;
+}
+
+.modal-body input,
+.modal-body textarea {
+  width: 100%;
+  background: rgba(10, 8, 6, 0.6);
+  border: 1px solid rgba(245, 176, 37, 0.25);
+  border-radius: 0.6rem;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus {
+  outline: none;
+  border-color: var(--gold-glow);
+  box-shadow: 0 0 10px rgba(245, 176, 37, 0.3);
+}
+
+.customizer-footer {
+  margin-top: 1.25rem;
+}
+
+.primary-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-accent));
+  color: #120e0a;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(245, 176, 37, 0.4);
+}

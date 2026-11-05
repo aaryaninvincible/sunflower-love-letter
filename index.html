@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To My Sunshine | A Sunflower Love Letter</title>
+  
+  <!-- Modern Romantic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for clean UI buttons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- OrbitControls -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- Canvas Confetti for romantic climax -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Golden Dust & Petal Overlay -->
+  <div id="petal-canvas-container"></div>
+
+  <!-- Header Navigation & Controls -->
+  <header class="top-nav">
+    <div class="logo">
+      <span class="sunflower-icon">🌻</span>
+      <span class="logo-text">Solstice & You</span>
+    </div>
+
+    <div class="header-actions">
+      <button id="music-btn" class="glass-btn" title="Toggle Romantic Melody">
+        <i class="fa-solid fa-music"></i>
+        <span class="btn-text">Melody: Off</span>
+      </button>
+      <button id="customize-btn" class="glass-btn" title="Edit Letter Details">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <span class="btn-text">Write Letter</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Split-Screen Creative Experience -->
+  <main class="main-experience">
+    
+    <!-- Left Section: 3D Sunflower Canvas & Interactive Oracle -->
+    <section class="sunflower-section">
+      <div id="canvas-3d-wrapper">
+        <canvas id="sunflower-canvas"></canvas>
+
+        <!-- 3D Scene Controls Overlay -->
+        <div class="canvas-hint">
+          <span class="hint-pill"><i class="fa-solid fa-hand-pointer"></i> Drag to rotate • Click sunflower to pluck love petals</span>
+        </div>
+
+        <div class="sunflower-status-badge">
+          <div class="pulse-dot"></div>
+          <span id="sunflower-mood">Following your light</span>
+        </div>
+
+        <!-- Petal Oracle Counter -->
+        <div class="oracle-container">
+          <div class="oracle-box">
+            <span class="oracle-label">Petals Plucked:</span>
+            <span id="petal-count" class="oracle-number">0</span>
+            <p id="oracle-verdict" class="oracle-quote">"Touch the blossom to see what your heart whispers..."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Section: Romantic Envelope & Love Letter -->
+    <section class="letter-section">
+      <div class="envelope-wrapper">
+        
+        <!-- The Physical Envelope Container -->
+        <div class="envelope" id="envelope">
+          
+          <!-- Back of Envelope -->
+          <div class="envelope-back"></div>
+
+          <!-- The Parchment Letter that slides out -->
+          <article class="letter-card" id="letter-card">
+            
+            <div class="letter-header">
+              <span class="date-stamp" id="letter-date">October 17, 2026</span>
+              <div class="wax-seal-mini">❦</div>
+            </div>
+
+            <div class="letter-content">
+              <h2 class="salutation" id="letter-salutation">My Dearest Sunshine,</h2>
+              
+              <div class="letter-body" id="letter-body">
+                <p>
+                  Like a sunflower that turns its face tirelessly toward the morning dawn, my heart naturally gravitates toward you in every quiet moment.
+                </p>
+                <p>
+                  You brought golden warmth into spaces that once only knew cold gray days. Even in the deepest storms, the mere thought of your smile acts as my compass, reminding me that light will always return.
+                </p>
+                <p id="poetic-verse" class="poetic-verse">
+                  "Wherever the sun journeys across the sky, the sunflower keeps its promise. And wherever life leads my footsteps, my heart has already chosen you."
+                </p>
+              </div>
+
+              <div class="letter-closing">
+                <p class="closing-label">Forever & unconditionally yours,</p>
+                <p class="signature-script" id="letter-sender">Your Devoted Heart</p>
+              </div>
+            </div>
+
+            <!-- Letter Quick Actions -->
+            <div class="letter-actions">
+              <button id="surprise-verse-btn" class="card-btn" title="Generate New Romantic Verse">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> New Verse
+              </button>
+              <button id="heart-burst-btn" class="card-btn primary" title="Send a Million Hearts">
+                <i class="fa-solid fa-heart"></i> Send Love
+              </button>
+            </div>
+          </article>
+
+          <!-- Envelope Top Flap with 3D fold effect -->
+          <div class="envelope-flap" id="envelope-flap">
+            <!-- Envelope Wax Seal on the Flap Tip -->
+            <div class="wax-seal" id="wax-seal" title="Click to Break the Seal & Open">
+              <div class="seal-inner">
+                <span class="seal-monogram">❤</span>
+              </div>
+              <div class="seal-ring"></div>
+            </div>
+          </div>
+
+          <!-- Envelope Pocket Front Cover -->
+          <div class="envelope-front"></div>
+
+        </div>
+
+        <p class="open-instruction" id="open-instruction">
+          <i class="fa-solid fa-arrow-up"></i> Tap the wax seal to open your letter
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Letter Customizer Modal Drawer -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="customizer-modal" id="customizer-modal">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-pen-nib"></i> Pen Your Own Love Letter</h3>
+        <button id="close-modal-btn" class="close-icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <label for="input-recipient">Recipient (To):</label>
+        <input type="text" id="input-recipient" value="My Dearest Sunshine" placeholder="e.g. My Beloved, Sophia, Alex">
+
+        <label for="input-message">The Message:</label>
+        <textarea id="input-message" rows="5" placeholder="Express your deepest feelings...">Like a sunflower that turns its face tirelessly toward the morning dawn, my heart naturally gravitates toward you in every quiet moment. You are my light, my warmth, and my forever home.</textarea>
+
+        <label for="input-sender">Sign-off / From:</label>
+        <input type="text" id="input-sender" value="Your Devoted Heart" placeholder="e.g. Forever Yours, Aryan">
+
+        <div class="customizer-footer">
+          <button id="apply-custom-letter-btn" class="primary-btn">
+            <i class="fa-solid fa-check"></i> Seal Into Letter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio and Three.js application scripts -->
+  <script src="audio.js"></script>
+  <script src="sunflower3d.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
